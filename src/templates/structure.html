@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dynamic Table with Stages</title>
+    <style>
+        table {
+            width: 70%;
+            margin: auto;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        td, th {
+            border: 1.3px solid #878787;
+            padding: 8px;
+            text-align: center;
+            opacity: 0.6; /* Makes the element semi-transparent */
+            background-color: rgba(255, 255, 255, 0.5); /* Inherits background color and makes it lighter */
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .sum-row {
+            font-weight: bold;
+            background-color: #f9f9f9; /* Light background for sum row */
+        }
+
+        /* Flex container for the row */
+        .flex-row {
+            display: flex;           /* Enables horizontal layout */
+            width: 100%;             /* Ensures it fills the entire <td> */
+            text-align: center;      /* Centers text within each column */
+        }
+
+        /* Class to reset margin and padding of a parent element */
+        .no-margin-padding {
+            margin: 0;
+            padding: 0;
+        }
+
+        /* 2/3 column */
+        .col-2-3 {
+            flex-basis: 66.66%; /* 2/3 width */
+            flex-shrink: 0;     /* Prevent shrinking */
+        }
+
+        /* 1/3 column */
+        .col-1-3 {
+            flex-basis: 33.33%; /* 1/3 width */
+            flex-shrink: 0; /* Prevent shrinking */
+            opacity: 0.6; /* Makes the element semi-transparent */
+            background-color: rgb(175, 175, 175, 1.4); /* Inherits background color and makes it lighter */
+            min-height: 4vh; /* Sets the height to 2% of the total viewport height */
+        }
+
+        /* Optional styling for visualization */
+        .flex-row > div {
+            border: 0px solid #ddd; /* Optional border for clarity */
+            padding: 0px;           /* Padding for internal spacing */
+            margin: 0px;
+        }
+
+        @media (max-width: 768px) { /* Mobile responsiveness */
+            .flex-row {
+                flex-direction: column; /* Stack vertically */
+                text-align: center;     /* Center text for better layout */
+            }
+
+            .col-2-3, .col-1-3 {
+                flex-basis: 100%; /* Each column takes full width */
+            }
+        }
+
+    </style>
+</head>
+<body>
+<h1 style="text-align: center;">Dynamic Table with Stages</h1>
+
+<!-- Single table for all sections -->
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Player 1</th>
+        <th>Player 2</th>
+        <th>Player 3</th>
+        <th>Player 4</th>
+        <th>Player 5</th>
+    </tr>
+    </thead>
+    <tbody>
+    {{range $stageIndex, $stage := .}} <!-- Loop through each stage -->
+    <!-- Rows for players in the current stage -->
+    {{range $stage.Rows}}
+    <tr style="background-color: {{$stage.Color}};">
+        <td>{{.RowID}}</td>
+        <td class="no-margin-padding">
+            <div class="flex-row">
+                <div class="col-2-3">{{.Player1}}</div> <!-- Left side: 2/3 -->
+                <div class="col-1-3"></div> <!-- Right side: 1/3 -->
+            </div>
+        </td>
+        <td class="no-margin-padding">
+            <div class="flex-row">
+                <div class="col-2-3">{{.Player2}}</div> <!-- Left side: 2/3 -->
+                <div class="col-1-3"></div> <!-- Right side: 1/3 -->
+            </div>
+        </td>
+        <td class="no-margin-padding">
+            <div class="flex-row">
+                <div class="col-2-3">{{.Player3}}</div> <!-- Left side: 2/3 -->
+                <div class="col-1-3"></div> <!-- Right side: 1/3 -->
+            </div>
+        </td>
+        <td class="no-margin-padding">
+            <div class="flex-row">
+                <div class="col-2-3">{{.Player4}}</div> <!-- Left side: 2/3 -->
+                <div class="col-1-3"></div> <!-- Right side: 1/3 -->
+            </div>
+        </td>
+        <td class="no-margin-padding">
+            <div class="flex-row">
+                <div class="col-2-3">{{.Player5}}</div> <!-- Left side: 2/3 -->
+                <div class="col-1-3"></div> <!-- Right side: 1/3 -->
+            </div>
+        </td>
+    </tr>
+    {{end}}
+
+    <!-- Sum row for the current stage -->
+    <tr class="sum-row">
+        <td colspan="1">Sum:</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    {{end}} <!-- End of stages -->
+    </tbody>
+</table>
+
+</body>
+</html>
