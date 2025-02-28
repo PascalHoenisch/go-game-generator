@@ -2,12 +2,12 @@
 <html>
 <head>
     <title>Dynamic Table with Stages</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         table {
             width: 70%;
-            margin: auto;
             border-collapse: collapse;
-            margin-bottom: 20px;
+            margin: auto auto 20px;
         }
 
         td, th {
@@ -142,6 +142,11 @@
     {{end}} <!-- End of stages -->
     </tbody>
 </table>
+
+<script>
+    // Function to replace ~~sometext~~ with <del>sometext</del> in the entire page
+    document.body.innerHTML = document.body.innerHTML.replace(/~~(.*?)~~/g, '<del>$1</del>');
+</script>
 
 </body>
 </html>

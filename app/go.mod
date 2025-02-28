@@ -1,3 +1,3 @@
 module go-game-generator
 
-go 1.23.6
+go 1.23
